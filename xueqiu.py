@@ -28,7 +28,7 @@ def run(q):
         delta = data[1]
         rate = data[2]
         time = data[3]
-        title = '当前价:{} 涨:{} 涨幅:{}'.format(price, delta, rate)
+        title = '当前价:{} 涨:{} 涨幅:{}%'.format(price, delta, rate)
         link = 'https://xueqiu.com/S/%s' % q
 
         url = 'https://xueqiu.com/v4/stock/quote.json?code=%s' % q
