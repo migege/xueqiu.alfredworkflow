@@ -9,7 +9,7 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 
-def run(q):
+def run(q, xq_a_token):
     q = q.strip()
     if not q:
         return
@@ -32,7 +32,7 @@ def run(q):
         link = 'https://xueqiu.com/S/%s' % q
 
         url = 'https://xueqiu.com/v4/stock/quote.json?code=%s' % q
-        cookies = {'xq_a_token': 'd55b097b6b0cdc269719842662c5f76a4f5a3e72',}
+        cookies = {'xq_a_token': xq_a_token,}
         r = requests.get(url, headers=headers, cookies=cookies)
         res = r.json()
         data = res[q]
@@ -50,7 +50,8 @@ def run(q):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 3:
         sys.exit()
     q = sys.argv[1]
-    run(q)
+    xq_a_token = sys.argv[2]
+    run(q, xq_a_token)
