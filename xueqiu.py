@@ -10,7 +10,7 @@ sys.setdefaultencoding('utf8')
 
 
 def run(q, xq_a_token):
-    q = q.strip()
+    q = str(q).strip()
     if not q:
         return
 
@@ -18,8 +18,7 @@ def run(q, xq_a_token):
         url = 'https://xueqiu.com/v4/stock/quotec.json?code=%s' % q
         headers = {
             'Host': 'xueqiu.com',
-            'User-Agent':
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.89 Safari/537.36',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.89 Safari/537.36',
         }
         r = requests.get(url, headers=headers)
         res = r.json()
@@ -32,12 +31,13 @@ def run(q, xq_a_token):
         link = 'https://xueqiu.com/S/%s' % q
 
         url = 'https://xueqiu.com/v4/stock/quote.json?code=%s' % q
-        cookies = {'xq_a_token': xq_a_token,}
+        cookies = {
+            'xq_a_token': xq_a_token,
+        }
         r = requests.get(url, headers=headers, cookies=cookies)
         res = r.json()
         data = res[q]
-        subtitle = '{name} 昨收:{last_close} 今开:{open} 最高:{high} 最低:{low}'.format(
-            **data)
+        subtitle = '{name} 昨收:{last_close} 今开:{open} 最高:{high} 最低:{low}'.format(**data)
 
         kwargs = {'title': title, 'subtitle': subtitle, 'arg': link}
 
