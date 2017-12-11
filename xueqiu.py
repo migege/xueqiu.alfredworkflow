@@ -50,8 +50,8 @@ def run(q, xq_a_token):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 2:
         sys.exit()
     q = sys.argv[1]
-    xq_a_token = sys.argv[2]
+    xq_a_token = os.getenv('XQ_A_TOKEN') or None
     run(q, xq_a_token)
